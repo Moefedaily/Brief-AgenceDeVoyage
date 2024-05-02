@@ -1,28 +1,39 @@
 'use client'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import axios from 'axios'
+import { login } from '../Services/login'
+import toast from 'react-hot-toast'
 
 export default function Login (){
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [errorMessage, setErrorMessage] = useState('')
-    const router = useRouter()
+    const { push } = useRouter()
 
     const handleLogin = async () => {
+        const loginData = {
+            email,
+            password,
+        };
+    
         try {
-            const response = await axios.post('http://localhost:8000/user/login', {
-                email,
-                password,
-            })
-            const { token } = response.data
-            localStorage.setItem('token', token) // save the token in local storage of the browser
-            router.push('/user/dashboard')
+            const res = await login(loginData);
+            toast.success('Connection Successfully');
+
+            if (res.status === 200) {
+                const token = res.data.token;
+                localStorage.setItem('token', token);
+                toast.success('Connection Successfully');
+            
+                setTimeout(() => {
+                    push('/user');
+                }, 900);
+            } else {
+                toast.error('Another Error !! Another One Again !! WTF!!!!');
+            }
         } catch (error) {
-            console.error('Login failed:', error)
-            setErrorMessage('Invalid username or password')
+            toast.error('Identifications Errors');
         }
-    }
+    };
 
     return (
         <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
@@ -33,11 +44,6 @@ export default function Login (){
             </div>
 
             <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-            {errorMessage && (
-                    <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
-                        {errorMessage}
-                    </div>
-                )}
                 <div className="space-y-6">
                     <div>
                         <label className="block text-sm font-medium leading-6 text-gray-900">

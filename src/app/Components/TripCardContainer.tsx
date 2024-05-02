@@ -1,11 +1,18 @@
-import React from 'react'
+import React from 'react';
+import { Carousel } from './Carousel';
+import { TripCard } from './TripCard';
+import { Trip } from '../../Utils/types';
 
-export const TripCardContainer = ({ children }: { children: React.ReactNode }) => {
+type TripCardContainerProps = {
+  trips: Trip[];
+};
+
+export const TripCardContainer = ({ trips }: TripCardContainerProps) => {
   return (
-    <div className="container mx-auto">
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {children}
-      </div>
-    </div>
-  )
-}
+    <Carousel>
+      {trips.map((trip) => (
+        <TripCard key={trip.id} trip={trip} />
+      ))}
+    </Carousel>
+  );
+};
