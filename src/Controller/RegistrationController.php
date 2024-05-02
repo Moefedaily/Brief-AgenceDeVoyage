@@ -37,7 +37,7 @@ class RegistrationController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
-            $roles =["ROLE_USER", "ROLE_ADMIN"];
+            $roles =["ROLE_USER", "ROLE_ADMIN"]; // edit the editor and admin roles
              $user->setRoles($roles);
 
             $entityManager->persist($user);
