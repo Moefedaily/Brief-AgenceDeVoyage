@@ -45,4 +45,37 @@ class TripRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+public function findByCategory(string $categoryName): array
+{
+    return $this->createQueryBuilder('t')
+        ->join('t.category', 'c')
+        ->where('c.name = :categoryName')
+        ->setParameter('categoryName', $categoryName)
+        ->getQuery()
+        ->getResult();
+}
+public function searchTrips(string $category = null, string $country = null, int $duration = null): array
+{
+    $qb = $this->createQueryBuilder('t')
+        ->leftJoin('t.category', 'c')
+        ->leftJoin('t.country', 'co');
+
+    if ($category) {
+        $qb->andWhere('c.name = :category')
+            ->setParameter('category', $category);
+    }
+
+    if ($country) {
+        $qb->andWhere('co.name = :country')
+            ->setParameter('country', $country);
+    }
+
+    if ($duration) {
+        $qb->andWhere('DATE_DIFF(t.endDate, t.startDate) = :duration')
+            ->setParameter('duration', $duration);
+    }
+
+    return $qb->getQuery()->getResult();
+}
 }

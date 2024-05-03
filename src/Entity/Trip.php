@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: TripRepository::class)]
 class Trip
@@ -17,12 +18,15 @@ class Trip
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(["category_by_trip"])]
     private ?string $title = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(["category_by_trip"])]
     private ?string $description = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(["category_by_trip"])]
     private ?string $image = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
@@ -32,6 +36,7 @@ class Trip
     private ?\DateTimeInterface $endDate = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 5, scale: 2)]
+    #[Groups(["category_by_trip"])]
     private ?string $price = null;
 
     #[ORM\ManyToOne(inversedBy: 'trips')]
@@ -40,6 +45,7 @@ class Trip
 
     #[ORM\ManyToOne(inversedBy: 'trips')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(["category_by_trip"])]
     private ?Category $category = null;
 
     #[ORM\ManyToOne(inversedBy: 'trips')]
