@@ -18,7 +18,7 @@ export const TripCard = ({ trip }: TripCardProps) => {
             href={`/trips/${trip.id}`}
             className="bg-red-500 hover:bg-red-600 text-white py-2 px-8 rounded-lg text-sm font-medium"
           >
-            Book Now →
+            Book Now 
           </Link>
       </div>
     </div>
