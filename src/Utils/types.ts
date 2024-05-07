@@ -6,14 +6,30 @@ export type authProps = {
     password: string
 }
 
+export type HeroProps = {
+    title?: string;
+    subtitle?: string;
+    image: string;
+    fullHeight?: boolean;
+  };
+  
+
 export type Trip = {
     id: number
     title: string
     description: string
     image: string
     price: number
+    country: {
+        name?: string;
+      };
   }
   
+  export type categoryProps={
+    id:number
+    name:string
+
+  }
   export type TripCardProps = {
     trip: Trip
   }
@@ -41,6 +57,18 @@ export type Trip = {
     totalPages: number;
     onPrevClick: () => void;
     onNextClick: () => void;
+  };
+  
+  export type SearchParams = {
+    category: string;
+    country: string;
+    duration: number;
+  };
+
+  export type SearchResultsSectionProps = {
+    title: string;
+    trips: any[];
+    tripsPerPage: number;
   };
   
 

@@ -1,37 +1,51 @@
+"use client"
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import { getCategories } from '../Services/category';
+import { SearchParams, categoryProps } from '../../Utils/types';
+import { useRouter } from 'next/navigation'
 
-interface SearchFormProps {
-  onSearch: (params: { category: string | null, country: string, duration: number }) => void;
-}
-
-export function SearchForm({ onSearch }: SearchFormProps) {
-  const [category, setCategory] = useState<string | null>(null);
+export function SearchForm(){
+    const { push } = useRouter()
+  const [category, setCategory] = useState('');
   const [country, setCountry] = useState('');
   const [duration, setDuration] = useState('');
   const [categories, setCategories] = useState([]);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   useEffect(() => {
-    fetchCategories();
-  }, []);
+    getCategories().then((res:any)=>{   
+        setCategories(res.data);
+  })
+        }, []);
 
-  const fetchCategories = async () => {
-    try {
-      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}api/categories`);
-      setCategories(response.data);
-    } catch (error) {
-      console.error('Error fetching categories:', error);
-    }
-  };
-
+ 
   function handleSearch() {
     const durationValue = duration ? parseInt(duration) : 0;
     if (durationValue >= 0) {
-      onSearch({ category, country, duration: durationValue });
+      const searchParams: SearchParams = {
+        category,
+        country,
+        duration: durationValue,
+      };
+
+      const searchQuery = new URLSearchParams();
+
+      if (searchParams.category !== '') {
+        searchQuery.append('category', searchParams.category);
+      }
+
+      if (searchParams.country !== '') {
+        searchQuery.append('country', searchParams.country);
+      }
+
+      if (searchParams.duration !== 0) {
+        searchQuery.append('duration', searchParams.duration.toString());
+      }
+
+      const queryString = searchQuery.toString();
+      push(`/user/search?${queryString}`);
     }
   }
-
   return (
     <div className="flex items-center space-x-4 bg-white p-4 rounded-lg shadow-md">
       <input
@@ -65,14 +79,13 @@ export function SearchForm({ onSearch }: SearchFormProps) {
               key="any"
               className="px-4 py-2 cursor-pointer hover:bg-gray-100"
               onClick={() => {
-                setCategory(null);
+                setCategory('');
                 setIsDropdownOpen(false);
               }}
             >
               Any
-              
             </div>
-            {categories.map((category) => (
+            {categories.map((category:categoryProps) => (
               <div
                 key={category.id}
                 className="px-4 py-2 cursor-pointer hover:bg-gray-100"

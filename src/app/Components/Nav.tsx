@@ -13,7 +13,7 @@ export default function Nav(){
               <Link href="/" className="text-white">Home</Link>
             </li>
             <li>
-              <Link href="/trips" className="text-white">All Trips</Link>
+              <Link href="/user" className="text-white">All Trips</Link>
             </li>
             <li>
               <Link href="/contact" className="text-white">Contact Us</Link>

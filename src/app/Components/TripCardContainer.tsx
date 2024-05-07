@@ -16,3 +16,5 @@ export const TripCardContainer = ({ trips }: TripCardContainerProps) => {
     </Carousel>
   );
 };
+
+ 

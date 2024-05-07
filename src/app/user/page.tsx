@@ -1,6 +1,5 @@
 "use client"
 import { useState, useEffect } from 'react'
-import axios from 'axios'
 import Header from '../Components/Header'
 import Footer from '../Components/Footer'
 import { Section } from '../Components/Section';
@@ -29,19 +28,17 @@ useEffect(() => {
     setTopDestinationTrips(res.data) 
   })
 }, [])
-
-function handleSearch(params: { category: string, country: string, duration: number }) {
-  searchTrips(params.category, params.country, params.duration)
-    .then(data => setTrips(data))
-    .catch(error => console.error('Error searching trips:', error));
-}
-
     return (
       <div>
         <Header />
-        <Hero/>
+        <Hero
+        title="Explore the beauty of nature"
+        subtitle="Discover the new you"
+        image="https://altours-html.asdesignsgalaxy.com/assets/images/Home/Home-2.jpg"
+        fullHeight
+      />
         <div className="container mx-auto">
-        <SearchForm onSearch={handleSearch} />
+        <SearchForm />
         <Section title="All Trips" trips={trips} />
         <Section title="Trending 2024" trips={trendingTrips} />
         <Section title="Top Destinations" trips={topDestinationTrips} />

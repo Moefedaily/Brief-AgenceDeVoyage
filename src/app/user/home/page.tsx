@@ -9,7 +9,7 @@ export default function Page() {
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (!token) {
-      router.push('/user/login');
+      router.push('/login');
     }
   }, []);
 
