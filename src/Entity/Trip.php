@@ -15,6 +15,7 @@ class Trip
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(["category_by_trip"])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
@@ -30,9 +31,11 @@ class Trip
     private ?string $image = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Groups(["trip_by_id"])]
     private ?\DateTimeInterface $startDate = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Groups(["trip_by_id"])]
     private ?\DateTimeInterface $endDate = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 5, scale: 2)]
@@ -41,6 +44,7 @@ class Trip
 
     #[ORM\ManyToOne(inversedBy: 'trips')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(["trip_by_id"])]
     private ?Country $country = null;
 
     #[ORM\ManyToOne(inversedBy: 'trips')]

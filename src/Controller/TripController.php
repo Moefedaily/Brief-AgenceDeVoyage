@@ -15,46 +15,7 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/trip')]
 class TripController extends AbstractController
 {
-    #[Route('s', name: 'app_trip_index', methods: ['GET'])]
-    public function index(TripRepository $tripRepository): Response
-    {
-            $trips = $tripRepository->findAll();
-            $data = [];
-            foreach ($trips as $trip) {
-                $data[] = [
-                    'id' => $trip->getId(),
-                    'title' => $trip->getTitle(),
-                    'description' => $trip->getDescription(),
-                    'image' => $trip->getImage(),
-                    'price' => $trip->getPrice(),
-                ];
-            }
-    
-            return new JsonResponse($data);
-        }
-    
-
-    #[Route('s/category/{categoryName}', name: 'app_trips_by_category')]
-    public function getTripsByCategory(string $categoryName, TripRepository $tripRepository): JsonResponse
-    {
-        $trips = $tripRepository->findByCategory($categoryName);
-        return $this->json($trips, 200, context:['groups' => ["category_by_trip"]]);
-    
-    }
-
-
-    #[Route('s/search', name: 'api_trips_search')]
-public function searchTrips(Request $request, TripRepository $tripRepository): Response
-{
-    $category = $request->query->get('category');
-    $country = $request->query->get('country');
-    $duration = $request->query->getInt('duration');
-
-    $trips = $tripRepository->searchTrips($category, $country, $duration);
-    return $this->json($trips, 200, context:['groups' => ["category_by_trip"]]);
-
-}
-
+   
     #[Route('/new', name: 'app_trip_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
