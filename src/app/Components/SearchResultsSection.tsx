@@ -1,4 +1,3 @@
-// SearchResultsSection.tsx
 import React, { useState, useEffect } from 'react';
 import { TripCard } from './TripCard';
 import { SearchResultsSectionProps } from '@/Utils/types';

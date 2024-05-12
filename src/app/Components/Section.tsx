@@ -1,11 +1,9 @@
-// Section.tsx
 import React, { useState, useEffect } from 'react';
 import { SectionProps } from '../../Utils/types';
 import { TripCardContainer } from './TripCardContainer';
-import { TripCard } from './TripCard';
 import { Pagination } from './Pagination';
 
-export const Section = ({ title, trips, isSearchResults = false }: SectionProps & { isSearchResults?: boolean }) => {
+export const Section = ({ title, trips,sectionTitle}: SectionProps) => {
   const [currentPage, setCurrentPage] = useState(1);
   const tripsPerPage = 4;
 
@@ -30,27 +28,27 @@ export const Section = ({ title, trips, isSearchResults = false }: SectionProps 
   };
 
   return (
-    <section className="py-8">
-      <div className="flex items-center justify-between mb-4">
-        <h2 className="text-2xl font-bold">{title}</h2>
-        {!isSearchResults && (
+    <section className="py-8 bg-gray-100 rounded-lg shadow-md">
+    <div className="container mx-auto px-4">
+    <h3 className="text-center text-xl font-semibold text-accent1 font-merriweather mb-6">
+      
+    {sectionTitle}
+    </h3>
+     
+      <div className="flex items-center justify-between mb-6">
+        <h2 className=" text-2xl font-bold text-primary font-montserrat">{title}</h2>
+       
           <Pagination
             currentPage={currentPage}
             totalPages={Math.ceil(trips.length / tripsPerPage)}
             onPrevClick={handlePrevClick}
             onNextClick={handleNextClick}
           />
-        )}
       </div>
-      {isSearchResults ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {currentTrips.map((trip) => (
-            <TripCard key={trip.id} trip={trip} />
-          ))}
-        </div>
-      ) : (
+     
         <TripCardContainer trips={currentTrips} />
-      )}
+      
+      </div>
     </section>
   );
 };

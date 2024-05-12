@@ -11,6 +11,7 @@ export type HeroProps = {
     subtitle?: string;
     image: string;
     fullHeight?: boolean;
+    showSearchBar?: boolean
   };
   
 
@@ -20,9 +21,12 @@ export type Trip = {
     description: string
     image: string
     price: number
-    country: {
-        name?: string;
-      };
+    startDate:string
+    endDate:string
+    destinations?: {
+        id: number;
+        name: string;
+      }[];
   }
   
   export type categoryProps={
@@ -38,12 +42,13 @@ export type Trip = {
     title: string;
     bgColor: string;
     color: string;
-    functionToPlay: () => void;
+    functionToPlay?: () => void;
     disabled?: boolean;
   };
   
 
   export type SectionProps = {
+    sectionTitle?:string,
     title: string;
     trips: Trip[];
   };
@@ -72,4 +77,24 @@ export type Trip = {
   };
   
 
+  export type AboutSectionProps = {
+    verticalImage1: string;
+    verticalImage2: string;
+    horizontalImage1: string;
+    horizontalImage2: string;
+    title: string;
+    description: string;
+    buttonLink:string;
+  };
+
+  export type ParallaxSectionProps = {
+    image: string;
+    title?: string;
+  }
+  export type ServiceCardProps = {
+    icon: React.ReactNode;
+    title: string;
+    description: string;
+  };
+    
   
