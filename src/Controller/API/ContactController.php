@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
@@ -21,8 +22,8 @@ class ContactController extends AbstractController
 {
   
     #[Route('/new', name: 'api_contacts_new', methods: ['POST'])]
-    public function new(Request $request, EntityManagerInterface $em, TripRepository $tripRepository, UserRepository $userRepository, ValidatorInterface $validator): JsonResponse
-    {
+    public function new(Request $request, EntityManagerInterface $em, TripRepository $tripRepository, UserRepository $userRepository,
+     ValidatorInterface $validator): JsonResponse    {
         $data = json_decode($request->getContent(), true);
     
         if (!is_array($data)) {

@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Serializer\SerializerInterface;
 
 #[Route('/user')]
-class UserController extends AbstractController
+class AdminController extends AbstractController
 {
     #[Route('/', name: 'app_user_index', methods: ['GET'])]
     public function index(UserRepository $userRepository): Response
@@ -23,33 +23,6 @@ class UserController extends AbstractController
             'users' => $userRepository->findAll(),
         ]);
     }
-
-    #[Route('/login', name: 'app_user_login', methods: ['POST'])]
-    public function login(Request $request, UserRepository $userRepository, SerializerInterface $serializer): JsonResponse
-    {
-        $data = json_decode($request->getContent(), true);
-        $email = $data['email'];
-        $password = $data['password'];
-    
-        $user = $userRepository->findOneBy(['email' => $email]);
-    
-        if (!$user || !password_verify($password, $user->getPassword())) {
-            return new JsonResponse(['message' => 'Invalid credentials'], Response::HTTP_UNAUTHORIZED);
-        }
-    
-        $token = bin2hex(random_bytes(16));
-    
-        $responseData = [
-            'user' => $serializer->serialize($user, 'json', [
-                'groups' => ['user'],
-            ]),
-            'token' => $token,
-        ];
-    
-        return new JsonResponse($responseData, Response::HTTP_OK);
-    }
-
-
 
     #[Route('/{id}', name: 'app_user_show', methods: ['GET'])]
     public function show(User $user): Response
