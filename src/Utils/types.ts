@@ -96,5 +96,14 @@ export type Trip = {
     title: string;
     description: string;
   };
+  export type ContactData = {
+    name: string;
+    email: string;
+    phone: string;
+    message: string;
+    trip: number ;
+    user_: number | null;
+  };
+  
     
   

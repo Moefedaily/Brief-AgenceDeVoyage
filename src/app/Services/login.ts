@@ -1,14 +1,23 @@
-import { authProps } from '@/Utils/types'
-import axios from 'axios'
+import axios from 'axios';
+import { authProps } from '@/Utils/types';
 
-export async function login(registerProps: authProps) {
-    let url = `${process.env.NEXT_PUBLIC_API_URL}user/login`
+export async function login(loginProps: authProps) {
+  const url = `${process.env.NEXT_PUBLIC_API_URL}api/login`;
 
-    return axios.post(
-        url,
-        {
-            email: registerProps.email,
-            password: registerProps.password,
-        }
-    )
+  try {
+    const response = await axios.post(url, {
+      email: loginProps.email,
+      password: loginProps.password,
+    });
+
+    console.log(response.data);
+    
+    const token = response.data.token;
+    localStorage.setItem('token', token);
+
+    return response;
+  } catch (error) {
+    console.error('Error during login:', error);
+    throw error;
+  }
 }

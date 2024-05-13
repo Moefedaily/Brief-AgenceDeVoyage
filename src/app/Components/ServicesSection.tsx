@@ -13,7 +13,7 @@ const ServicesSection = () => {
               <h2 className="text-3xl font-bold text-primary font-montserrat mb-2">Our Services</h2>
               <p className="text-lg text-gray-600 font-roboto mb-4">What We Offer For Our Great Packages</p>
               <Link href="/contact">
-                <button className="bg-primary text-white px-6 py-3 rounded-md hover:bg-primary-dark transition-colors duration-300 font-semibold">
+                <button className="bg-primary text-white px-6 py-3 sm:mb-4 rounded-md hover:bg-primary-dark transition-colors duration-300 font-semibold">
                   Schedule a Trip
                 </button>
               </Link>
