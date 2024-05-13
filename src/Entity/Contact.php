@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Repository\ContactRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ContactRepository::class)]
 class Contact
@@ -12,27 +14,38 @@ class Contact
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['contact_new'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Length(max: 20, maxMessage: 'The Name field cannot exceed {{ limit }} characters')]
+    #[Groups(['contact_new'])]
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Email(message: 'The Email "{{ value }}" is not a valid email')]
+    #[Groups(['contact_new'])]
     private ?string $email = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Length(max: 20, maxMessage: 'The Phone field cannot exceed {{ limit }} characters')]
+    #[Groups(['contact_new'])]
     private ?string $phone = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\NotBlank(message: 'The message field is required')]
+    #[Groups(['contact_new'])]
     private ?string $message = null;
 
     #[ORM\Column(length: 255)]
     private ?string $status = null;
 
-    #[ORM\ManyToOne(inversedBy: 'contacts')]
+    #[ORM\ManyToOne(inversedBy: 'contacts', targetEntity: Trip::class, cascade: ['persist'])]
+    #[ORM\JoinColumn(name: 'trip_id', referencedColumnName: 'id')]
     private ?Trip $trip = null;
 
     #[ORM\ManyToOne(inversedBy: 'contacts')]
+    #[Groups(['contact_new'])]
     private ?User $user_ = null;
 
     public function getId(): ?int

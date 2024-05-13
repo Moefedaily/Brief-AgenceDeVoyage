@@ -15,7 +15,10 @@ class Trip
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(["category_by_trip"])]
+    #[Groups([
+        'category_by_trip',
+        'contact_new'
+    ])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
@@ -42,18 +45,15 @@ class Trip
     #[Groups(["category_by_trip"])]
     private ?string $price = null;
 
-    #[ORM\ManyToOne(inversedBy: 'trips')]
-    #[ORM\JoinColumn(nullable: false)]
-    #[Groups(["trip_by_id"])]
-    private ?Country $country = null;
+
 
     #[ORM\ManyToOne(inversedBy: 'trips')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     #[Groups(["category_by_trip"])]
     private ?Category $category = null;
 
     #[ORM\ManyToOne(inversedBy: 'trips')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?User $editor = null;
 
     /**
@@ -62,9 +62,18 @@ class Trip
     #[ORM\OneToMany(targetEntity: Contact::class, mappedBy: 'trip')]
     private Collection $contacts;
 
+    /**
+     * @var Collection<int, Country>
+     */
+    #[ORM\ManyToMany(targetEntity: Country::class, inversedBy: 'trips')]
+    
+    #[Groups(["category_by_trip"])]
+    private Collection $destinations;
+
     public function __construct()
     {
         $this->contacts = new ArrayCollection();
+        $this->destinations = new ArrayCollection();
     }
 
 
@@ -145,17 +154,7 @@ class Trip
         return $this;
     }
 
-    public function getCountry(): ?Country
-    {
-        return $this->country;
-    }
-
-    public function setCountry(?Country $country): static
-    {
-        $this->country = $country;
-
-        return $this;
-    }
+   
 
     public function getCategory(): ?Category
     {
@@ -207,6 +206,30 @@ class Trip
                 $contact->setTrip(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Country>
+     */
+    public function getDestinations(): Collection
+    {
+        return $this->destinations;
+    }
+
+    public function addDestination(Country $destination): static
+    {
+        if (!$this->destinations->contains($destination)) {
+            $this->destinations->add($destination);
+        }
+
+        return $this;
+    }
+
+    public function removeDestination(Country $destination): static
+    {
+        $this->destinations->removeElement($destination);
 
         return $this;
     }

@@ -17,13 +17,13 @@ class Country
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(["trip_by_id"])]
+    #[Groups(["category_by_trip"])]
     private ?string $name = null;
 
     /**
      * @var Collection<int, Trip>
      */
-    #[ORM\OneToMany(targetEntity: Trip::class, mappedBy: 'country')]
+    #[ORM\ManyToMany(targetEntity: Trip::class, mappedBy: 'destinations')]
     private Collection $trips;
 
     public function __construct()
@@ -60,7 +60,7 @@ class Country
     {
         if (!$this->trips->contains($trip)) {
             $this->trips->add($trip);
-            $trip->setCountry($this);
+            $trip->addDestination($this);
         }
 
         return $this;
@@ -69,10 +69,7 @@ class Country
     public function removeTrip(Trip $trip): static
     {
         if ($this->trips->removeElement($trip)) {
-            // set the owning side to null (unless already changed)
-            if ($trip->getCountry() === $this) {
-                $trip->setCountry(null);
-            }
+            $trip->removeDestination($this);
         }
 
         return $this;

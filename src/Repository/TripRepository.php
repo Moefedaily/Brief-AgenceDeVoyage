@@ -59,7 +59,7 @@ public function searchTrips(string $category = null, string $country = null, int
 {
     $qb = $this->createQueryBuilder('t')
         ->leftJoin('t.category', 'c')
-        ->leftJoin('t.country', 'co');
+        ->leftJoin('t.destinations', 'd');
 
     if ($category) {
         $qb->andWhere('c.name = :category')
@@ -67,7 +67,7 @@ public function searchTrips(string $category = null, string $country = null, int
     }
 
     if ($country) {
-        $qb->andWhere('co.name = :country')
+        $qb->andWhere('d.name = :country')
             ->setParameter('country', $country);
     }
 
