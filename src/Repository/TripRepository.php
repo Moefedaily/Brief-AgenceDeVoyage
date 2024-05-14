@@ -49,7 +49,7 @@ class TripRepository extends ServiceEntityRepository
 public function findByCategory(string $categoryName): array
 {
     return $this->createQueryBuilder('t')
-        ->join('t.category', 'c')
+        ->join('t.categories', 'c')
         ->where('c.name = :categoryName')
         ->setParameter('categoryName', $categoryName)
         ->getQuery()
@@ -58,14 +58,14 @@ public function findByCategory(string $categoryName): array
 public function searchTrips(string $category = null, string $country = null, int $duration = null): array
 {
     $qb = $this->createQueryBuilder('t')
-        ->leftJoin('t.category', 'c')
+        ->leftJoin('t.categories', 'c')
         ->leftJoin('t.destinations', 'd');
 
-    if ($category) {
-        $qb->andWhere('c.name = :category')
-            ->setParameter('category', $category);
-    }
-
+        if ($category) {
+            $qb->andWhere('c.name = :category')
+                ->setParameter('category', $category);
+        }
+    
     if ($country) {
         $qb->andWhere('d.name = :country')
             ->setParameter('country', $country);

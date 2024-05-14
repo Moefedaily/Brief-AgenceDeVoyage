@@ -47,10 +47,10 @@ class Trip
 
 
 
-    #[ORM\ManyToOne(inversedBy: 'trips')]
-    #[ORM\JoinColumn(nullable: true)]
+    #[ORM\ManyToMany(targetEntity: Category::class, inversedBy: 'trips')]
+    #[ORM\JoinTable(name: 'trip_category')]
     #[Groups(["category_by_trip"])]
-    private ?Category $category = null;
+    private Collection $categories;
 
     #[ORM\ManyToOne(inversedBy: 'trips')]
     #[ORM\JoinColumn(nullable: true)]
@@ -156,18 +156,29 @@ class Trip
 
    
 
-    public function getCategory(): ?Category
+     /**
+     * @return Collection<int, Category>
+     */
+    public function getCategories(): Collection
     {
-        return $this->category;
+        return $this->categories;
     }
 
-    public function setCategory(?Category $category): static
+    public function addCategory(Category $category): self
     {
-        $this->category = $category;
+        if (!$this->categories->contains($category)) {
+            $this->categories->add($category);
+        }
 
         return $this;
     }
 
+    public function removeCategory(Category $category): self
+    {
+        $this->categories->removeElement($category);
+
+        return $this;
+    }
     public function getEditor(): ?User
     {
         return $this->editor;

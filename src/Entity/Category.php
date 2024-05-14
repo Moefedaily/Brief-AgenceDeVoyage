@@ -23,7 +23,7 @@ class Category
     /**
      * @var Collection<int, Trip>
      */
-    #[ORM\OneToMany(targetEntity: Trip::class, mappedBy: 'category')]
+    #[ORM\ManyToMany(targetEntity: Trip::class, mappedBy: 'categories')]
     private Collection $trips;
 
     public function __construct()
@@ -56,23 +56,19 @@ class Category
         return $this->trips;
     }
 
-    public function addTrip(Trip $trip): static
+    public function addTrip(Trip $trip): self
     {
         if (!$this->trips->contains($trip)) {
             $this->trips->add($trip);
-            $trip->setCategory($this);
+            $trip->addCategory($this);
         }
 
         return $this;
     }
-
-    public function removeTrip(Trip $trip): static
+    public function removeTrip(Trip $trip): self
     {
         if ($this->trips->removeElement($trip)) {
-            // set the owning side to null (unless already changed)
-            if ($trip->getCategory() === $this) {
-                $trip->setCategory(null);
-            }
+            $trip->removeCategory($this);
         }
 
         return $this;
