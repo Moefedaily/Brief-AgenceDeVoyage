@@ -105,5 +105,9 @@ export type Trip = {
     user_: number | null;
   };
   
+  export type ContactFormProps ={
+    trips: Trip[];
+  }
+  
     
   

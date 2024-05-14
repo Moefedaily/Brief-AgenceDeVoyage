@@ -1,18 +1,15 @@
-import { ServiceCardProps } from '@/Utils/types';
-import React from 'react';
-
-
+import { ServiceCardProps } from '../../Utils/types';
 
 const ServiceCard = ({ icon, title, description }: ServiceCardProps) => {
-    return (
-        <div className="bg-white rounded-lg shadow-md p-6">
-                  <div className="flex flex-col items-center">
-          <div className="text-4xl text-primary mb-4">{icon}</div>
-          <h3 className="text-xl font-bold mb-2">{title}</h3>
-          <p className="text-gray-600">{description}</p>
-        </div>
-        </div>
-      );
-    };
+  return (
+    <div className="bg-gray-500 rounded-lg shadow-md p-6">
+      <div className="flex items-center mb-4">
+        <div className="text-white text-2xl mr-4">{icon}</div>
+        <h3 className="text-white text-xl font-bold">{title}</h3>
+      </div>
+      <p className="text-white">{description}</p>
+    </div>
+  );
+};
 
 export default ServiceCard;

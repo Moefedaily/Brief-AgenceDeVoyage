@@ -22,7 +22,7 @@ const ServicesSection = () => {
           <div className="lg:w-2/3 lg:pl-8 ">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4">
               <ServiceCard
-                icon={<FaHome />}
+                icon={<FaHome />} 
                 title="Luxury Hotel"
                 description="Lorem ipsum, dolor sit amet consectetur adipisicing elit." 
               />
