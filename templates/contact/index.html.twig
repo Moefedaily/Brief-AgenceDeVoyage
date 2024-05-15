@@ -3,41 +3,47 @@
 {% block title %}Contact index{% endblock %}
 
 {% block body %}
-    <h1>Contact index</h1>
+    <div class="my-4">
+        <div class="mb-4">
+            <a href="{{ path('app_contact_new') }}" class="bg-gradient-to-r from-emerald-600 to-emerald-700 hover:bg-gray-400 text-white font-bold py-2 px-4 rounded">Create New Contact</a>
+        </div>
+    </div>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Phone</th>
-                <th>Message</th>
-                <th>Status</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for contact in contacts %}
-            <tr>
-                <td>{{ contact.id }}</td>
-                <td>{{ contact.name }}</td>
-                <td>{{ contact.email }}</td>
-                <td>{{ contact.phone }}</td>
-                <td>{{ contact.message }}</td>
-                <td>{{ contact.status }}</td>
-                <td>
-                    <a href="{{ path('app_contact_show', {'id': contact.id}) }}">show</a>
-                    <a href="{{ path('app_contact_edit', {'id': contact.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="7">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_contact_new') }}">Create new</a>
+    <div class="w-full overflow-hidden rounded-lg shadow-lg">
+        <table class="table-auto w-full">
+            <thead>
+                <tr class="bg-gray-200 text-gray-700">
+                    <th class="p-4">Id</th>
+                    <th class="p-4">Name</th>
+                    <th class="p-4">Email</th>
+                    <th class="p-4">Phone</th>
+                    <th class="p-4">Message</th>
+                    <th class="p-4">Status</th>
+                    <th class="p-4">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for contact in contacts %}
+                    <tr class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
+                        <td class="p-4">{{ contact.id }}</td>
+                        <td class="p-4">{{ contact.name }}</td>
+                        <td class="p-4">{{ contact.email }}</td>
+                        <td class="p-4">{{ contact.phone }}</td>
+                        <td class="p-4">{{ contact.message }}</td>
+                        <td class="p-4">{{ contact.status }}</td>
+                        <td class="p-4">
+                            <div class="flex justify-center space-x-2">
+                                <a href="{{ path('app_contact_show', {'id': contact.id}) }}" class="px-2 py-1 text-amber-700 bg-white border border-amber-600 rounded hover:border-amber-900">Show</a>
+                                <a href="{{ path('app_contact_edit', {'id': contact.id}) }}" class="px-2 py-1 text-emerald-700 bg-white border border-emerald-600 rounded hover:border-emerald-800">Edit</a>
+                            </div>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="7" class="py-4 px-6 text-center">No records found</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}

@@ -11,25 +11,27 @@
 			</h2>
 		</div>
 
-		<div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-			<div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+		<div class="mt-8 sm:mx-auto sm:w-full ">
+			<div class="bg-white py-8 px-8 shadow sm:rounded-lg sm:px-10">
 				{{ form_start(registrationForm, {'attr': {'class': 'space-y-6'}}) }}
                 {{ form_errors(registrationForm) }}
 
                 
 				{{ form_row(registrationForm.firstName, 
                     {'label': 'First Name', 'label_attr': {'class': 'block text-sm font-medium text-gray-700'}, 
-                    'attr': {'class': 'mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'}}) }}
+                    
+					})
+					 }}
 				{{ form_row(registrationForm.lastName, 
                     {'label': 'Last Name', 'label_attr': {'class': 'block text-sm font-medium text-gray-700'}, 
-                    'attr': {'class': 'mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'}}) }}
+                    }) }}
 				{{ form_row(registrationForm.email, {'label': 'Email', 'label_attr': {'class': 'block text-sm font-medium text-gray-700'},
-                     'attr': {'class': 'mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'}}) }}
+                     }) }}
 				{{ form_row(registrationForm.phone, {'label': 'Phone', 'label_attr': {'class': 'block text-sm font-medium text-gray-700'},
-                     'attr': {'class': 'mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'}}) }}
+                     }) }}
 				{{ form_row(registrationForm.plainPassword, 
                     {'label': 'Password', 'label_attr': {'class': 'block text-sm font-medium text-gray-700'},
-                     'attr': {'class': 'mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'}}) }}
+                     }) }}
 				{{ form_row(registrationForm.role) }}
 				{{ form_row(registrationForm.submit) }}
 				{{ form_end(registrationForm) }}

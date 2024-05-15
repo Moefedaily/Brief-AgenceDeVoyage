@@ -1,4 +1,13 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+
+
+    {{ form_start(form, {'attr': {'class': 'space-y-4'}}) }}  
+     {{ form_widget(form) }}
+
+    
+    <div class="flex items-center gap-4">
+    <button class="bg-gradient-to-r from-emerald-600 to-emerald-700 hover:bg-gray-400 text-white font-bold py-2 px-3 rounded">
+    {{ button_label|default('Save') }}</button>
+
+    <a href="{{ path('app_trip_index') }}" class="bg-gradient-to-r from-slate-600 to-slate-500 hover:bg-slate-900 text-white font-bold py-2 px-3 rounded my-2">Back</a>
+    </div>
+    {{ form_end(form) }}

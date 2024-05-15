@@ -3,40 +3,29 @@
 {% block title %}Contact{% endblock %}
 
 {% block body %}
-    <h1>Contact</h1>
+    <div class="sm:mx-auto sm:w-full sm:max-w-md">
+        <h2 class="my-6 text-center text-2xl font-extrabold text-gray-700">
+              Details
+            <br><span class="text-amber-600">{{ contact.name }}</span>
+        </h2>
+    </div>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ contact.id }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ contact.name }}</td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td>{{ contact.email }}</td>
-            </tr>
-            <tr>
-                <th>Phone</th>
-                <td>{{ contact.phone }}</td>
-            </tr>
-            <tr>
-                <th>Message</th>
-                <td>{{ contact.message }}</td>
-            </tr>
-            <tr>
-                <th>Status</th>
-                <td>{{ contact.status }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_contact_index') }}">back to list</a>
-
-    <a href="{{ path('app_contact_edit', {'id': contact.id}) }}">edit</a>
-
-    {{ include('contact/_delete_form.html.twig') }}
+    <div class="bg-white shadow-md rounded-lg p-6">
+        <div class="flex items-center mb-4">
+            <div class="ml-6">
+                <h2 class="text-2xl font-bold">{{ contact.name }}</h2>
+                <p class="text-gray-600 text-lg mt-2">{{ contact.message }}</p>
+                <div class="mt-4">
+                    <p class="text-gray-600"><strong>Email:</strong> {{ contact.email }}</p>
+                    <p class="text-gray-600"><strong>Phone:</strong> {{ contact.phone }}</p>
+                    <p class="text-gray-600"><strong>Status:</strong> {{ contact.status }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="flex gap-4 mt-6">
+            <a href="{{ path('app_contact_index') }}" class="bg-gradient-to-r from-slate-600 to-slate-500 hover:bg-slate-900 text-white font-bold py-2 px-3 rounded">Back</a>
+            <a href="{{ path('app_contact_edit', {'id': contact.id}) }}" class="bg-gradient-to-r from-emerald-600 to-emerald-700 hover:bg-gray-400 text-white font-bold py-2 px-3 rounded">Edit</a>
+            {{ include('contact/_delete_form.html.twig') }}
+        </div>
+    </div>
 {% endblock %}

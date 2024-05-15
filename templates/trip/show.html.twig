@@ -3,44 +3,30 @@
 {% block title %}Trip{% endblock %}
 
 {% block body %}
-    <h1>Trip</h1>
+<div class="sm:mx-auto sm:w-full sm:max-w-md">
+			<h2 class="my-6 text-center text-2xl font-extrabold text-gray-700">
+				Trip Details
+                <br><div class="text-amber-600"> {{ trip.title }}</div>
+			</h2>
+		</div>
+    <div class="bg-white shadow-md rounded-lg p-6">
+        <div class="flex items-center mb-4">
+            <img src="{{ trip.image }}" alt="{{ trip.title }}" class="w-64 h-64 object-cover rounded-lg">
+            <div class="ml-6">
+                <h2 class="text-2xl font-bold">{{ trip.title }}</h2>
+                <p class="text-gray-600 text-lg mt-2">{{ trip.description }}</p>
+                <div class="mt-4">
+                    <p class="text-gray-600"><strong>Start Date:</strong> {{ trip.startDate ? trip.startDate|date('Y-m-d') : '' }}</p>
+                    <p class="text-gray-600"><strong>End Date:</strong> {{ trip.endDate ? trip.endDate|date('Y-m-d') : '' }}</p>
+                    <p class="text-gray-600"><strong>Price:</strong> {{ trip.price }}</p>
+                </div>
+            </div>
+        </div>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ trip.id }}</td>
-            </tr>
-            <tr>
-                <th>Title</th>
-                <td>{{ trip.title }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ trip.description }}</td>
-            </tr>
-            <tr>
-                <th>Image</th>
-                <td>{{ trip.image }}</td>
-            </tr>
-            <tr>
-                <th>StartDate</th>
-                <td>{{ trip.startDate ? trip.startDate|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>EndDate</th>
-                <td>{{ trip.endDate ? trip.endDate|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Price</th>
-                <td>{{ trip.price }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_trip_index') }}">back to list</a>
-
-    <a href="{{ path('app_trip_edit', {'id': trip.id}) }}">edit</a>
-
-    {{ include('trip/_delete_form.html.twig') }}
+        <div class="flex gap-4 mt-6">
+             <a href="{{ path('app_trip_index') }}" class="bg-gradient-to-r from-slate-600 to-slate-500 hover:bg-slate-900 text-white font-bold py-2 px-3 rounded">Back</a>
+            <a href="{{ path('app_trip_edit', {'id': trip.id}) }}" class="bg-gradient-to-r from-emerald-600 to-emerald-700 hover:bg-gray-400 text-white font-bold py-2 px-3 rounded">Edit</a>
+            {{ include('trip/_delete_form.html.twig') }}
+        </div>
+    </div>
 {% endblock %}

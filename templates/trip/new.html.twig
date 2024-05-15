@@ -3,9 +3,15 @@
 {% block title %}New Trip{% endblock %}
 
 {% block body %}
-    <h1>Create new Trip</h1>
-
+<div class="sm:mx-auto sm:w-full sm:max-w-md">
+			<h2 class="my-6 text-center text-3xl font-extrabold text-gray-700">
+				Create a new Trip
+			</h2>
+		</div>
+    <div class=" bg-white rounded-lg overflow-hidden shadow-2xl flex flex-col justify-center py-12 sm:px-6 lg:px-12">
+		
     {{ include('trip/_form.html.twig') }}
+    </div>
 
-    <a href="{{ path('app_trip_index') }}">back to list</a>
+     
 {% endblock %}

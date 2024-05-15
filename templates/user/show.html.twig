@@ -3,44 +3,28 @@
 {% block title %}User{% endblock %}
 
 {% block body %}
-    <h1>User</h1>
+    <div class="sm:mx-auto sm:w-full ">
+        <h2 class="my-6 text-center text-2xl font-extrabold text-gray-700">
+             <span class="text-amber-600">{{ user.firstName }} 's</span>
+             Details
+        </h2>
+    </div>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ user.id }}</td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td>{{ user.email }}</td>
-            </tr>
-            <tr>
-                <th>Roles</th>
-                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-            </tr>
-            <tr>
-                <th>Password</th>
-                <td>{{ user.password }}</td>
-            </tr>
-            <tr>
-                <th>FirstName</th>
-                <td>{{ user.firstName }}</td>
-            </tr>
-            <tr>
-                <th>LastName</th>
-                <td>{{ user.lastName }}</td>
-            </tr>
-            <tr>
-                <th>Phone</th>
-                <td>{{ user.phone }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_user_index') }}">back to list</a>
-
-    <a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
-
-    {{ include('user/_delete_form.html.twig') }}
+    <div class="bg-white shadow-md rounded-lg p-8">
+        <div class="flex items-center mb-4">
+            <div class="ml-6">
+                <h2 class="text-2xl font-bold text-slate-800"> {{ user.lastName }}</h2>
+                <div class="mt-4">
+                    <p class="text-gray-600"><strong>Email:</strong> {{ user.email }}</p>
+                    <p class="text-gray-600"><strong>Phone:</strong> {{ user.phone }}</p>
+                    <p class="text-gray-600"><strong>Roles:</strong> {{ user.roles ? user.roles|join(', ') : '' }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="flex gap-4 mt-6">
+            <a href="{{ path('app_user_index') }}" class="bg-gradient-to-r from-slate-600 to-slate-500 hover:bg-slate-900 text-white font-bold py-2 px-3 rounded">Back</a>
+            <a href="{{ path('app_user_edit', {'id': user.id}) }}" class="bg-gradient-to-r from-emerald-600 to-emerald-700 hover:bg-gray-400 text-white font-bold py-2 px-3 rounded">Edit</a>
+            {{ include('user/_delete_form.html.twig') }}
+        </div>
+    </div>
 {% endblock %}

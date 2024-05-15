@@ -45,10 +45,8 @@ class Trip
     #[Groups(["category_by_trip"])]
     private ?string $price = null;
 
-
-
     #[ORM\ManyToMany(targetEntity: Category::class, inversedBy: 'trips')]
-    #[ORM\JoinTable(name: 'trip_category')]
+    #[ORM\JoinTable(name:'trip_category')]
     #[Groups(["category_by_trip"])]
     private Collection $categories;
 
@@ -74,6 +72,7 @@ class Trip
     {
         $this->contacts = new ArrayCollection();
         $this->destinations = new ArrayCollection();
+        $this->categories = new ArrayCollection();
     }
 
 

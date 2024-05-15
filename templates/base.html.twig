@@ -1,20 +1,77 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
-        {% block stylesheets %}
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    {% block stylesheets %}
         <script src="https://cdn.tailwindcss.com"></script>
-        <link rel="stylesheet" href="{{ asset('styles/app.css') }}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    {% endblock %}
+</head>
+<body class="bg-gray-100 flex flex-col min-h-screen">
+    <header class="bg-gradient-to-r from-slate-700 to-slate-900 shadow">
+        <nav class="container mx-auto flex justify-between items-center px-4 py-4">
+            <a href="{{ path('app_trip_index') }}" class="text-xl font-bold text-amber-100">Travel Agency</a>
+            <div class="flex items-center">
+                {% if app.user %}
+                    <span class="text-amber-400 font-bold mr-4">Welcome, {{ app.user.lastName }}</span>
+                    <a href="{{ path('app_logout') }}" class="text-amber-100 font-semibold hover:text-amber-600 mr-4">Logout</a>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a href="{{ path('app_register') }}" class="text-amber-100 font-semibold hover:text-amber-600">Register</a>
+                    {% endif %}
+                {% else %}
+                    <a href="{{ path('app_login') }}" class="text-amber-100 font-semibold hover:text-amber-600 mr-4">Login</a>
+                {% endif %}
+            </div>
+        </nav>
+    </header>
 
-        {% endblock %}
+    <div class="flex flex-grow">
+        {% if app.user %}
+            <aside class="w-72 bg-gradient-to-b from-slate-700 to-slate-900 text-white rounded shadow-lg py-10">
+                <div class="p-4 flex items-center">
+                    <i class="fas fa-plane-departure text-white text-3xl mx-auto"></i>
+                </div>
+                <nav class="py-4 h-full">
+                    <ul class="space-y-2 font-medium">
+                      
+                        <li>
+                            <a href="{{ path('app_trip_index') }}" class="flex items-center p-2 text-gray-300 hover:text-white rounded-lg hover:bg-slate-700 transition duration-150 ease-in-out {% if app.request.attributes.get('_route') == 'app_trip_index' %}bg-slate-600 text-white{% endif %}">
+                                <i class="fas fa-th-large text-gray-400 w-5 h-5"></i>
+                                <span class="flex-1 ms-3 whitespace-nowrap">Manage Trips</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ path('app_user_index') }}" class="flex items-center p-2 text-gray-300 hover:text-white rounded-lg hover:bg-slate-700 transition duration-150 ease-in-out {% if app.request.attributes.get('_route') == 'app_user_index' %}bg-slate-600 text-white{% endif %}">
+                                <i class="fas fa-users text-gray-400 w-5 h-5"></i>
+                                <span class="flex-1 ms-3 whitespace-nowrap">Manage Users</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ path('app_contact_index') }}" class="flex items-center p-2 text-gray-300 hover:text-white rounded-lg hover:bg-slate-700 transition duration-150 ease-in-out {% if app.request.attributes.get('_route') == 'app_contact_index' %}bg-slate-600 text-white{% endif %}">
+                                <i class="fas fa-envelope text-gray-400 w-5 h-5"></i>
+                                <span class="flex-1 ms-3 whitespace-nowrap">Manage Contacts</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                
+            </aside>
+        {% endif %}
 
-        {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+        <main class="flex-grow ml-1">
+            <div class="container py-10 px-4 mx-auto">
+                {% block body %}{% endblock %}
+            </div>
+        </main>
+    </div>
+
+    <footer class="bg-gradient-to-r from-slate-700 to-slate-900 text-white py-4">
+        <div class="container mx-auto px-4 text-center">
+            &copy; {{ "now"|date("Y") }} Travel Agency. All rights reserved.
+        </div>
+    </footer>
+
+    {% block javascripts %}{% endblock %}
+</body>
 </html>

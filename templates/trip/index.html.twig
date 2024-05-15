@@ -1,45 +1,72 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Trip index{% endblock %}
+{% block title %}Trips{% endblock %}
 
 {% block body %}
-    <h1>Trip index</h1>
+        {% if is_granted('ROLE_EDITOR') %}
+        <div class="my-4 flex justify-between">
+            <div class="mb-4">
+                {% if showAll %}
+                    <a href="{{ path('app_trip_index', {'show_all': 0}) }}" class="bg-gradient-to-r from-slate-600 to-slate-500 hover:bg-slate-900 text-white font-bold py-2 px-4 rounded">See My Trips</a>
+                {% else %}
+                    <a href="{{ path('app_trip_index') }}" class="bg-gradient-to-r from-slate-600 to-slate-500 hover:bg-slate-900 text-white font-bold py-2 px-4 rounded">See All Trips</a>
+                {% endif %}
+            </div>
+        {% endif %}
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Image</th>
-                <th>StartDate</th>
-                <th>EndDate</th>
-                <th>Price</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for trip in trips %}
-            <tr>
-                <td>{{ trip.id }}</td>
-                <td>{{ trip.title }}</td>
-                <td>{{ trip.description }}</td>
-                <td>{{ trip.image }}</td>
-                <td>{{ trip.startDate ? trip.startDate|date('Y-m-d') : '' }}</td>
-                <td>{{ trip.endDate ? trip.endDate|date('Y-m-d') : '' }}</td>
-                <td>{{ trip.price }}</td>
-                <td>
-                    <a href="{{ path('app_trip_show', {'id': trip.id}) }}">show</a>
-                    <a href="{{ path('app_trip_edit', {'id': trip.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="8">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+         <div >
+            <a href="{{ path('app_trip_new') }}" class="bg-gradient-to-r from-emerald-600 to-emerald-700 hover:bg-gray-400 text-white font-bold py-2 px-4 rounded">Create New Trip</a>
+        </div>
+</div>
 
-    <a href="{{ path('app_trip_new') }}">Create new</a>
-{% endblock %}
+       <div class="container  py-4 px-4">
+        <div class="w-full overflow-hidden rounded-lg shadow-lg">
+            <table class="table-auto  w-full">
+                <thead>
+                    <tr class="bg-gray-200 text-gray-700">
+                        <th class="py-4 px-4">ID</th>
+                        <th class="py-4 px-4">Title</th>
+                        <th class="py-4 px-4">Description</th>
+                        <th class="py-4 px-4">Image</th>
+                        <th class="py-4 px-4">Start Date</th>
+                        <th class="py-4 px-4">End Date</th>
+                        <th class="py-4 px-4">Price</th>
+                        <th class="py-4 px-4">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for trip in trips %}
+                        <tr class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
+                            <td class="py-4 px-6">{{ trip.id }}</td>
+                            <td class="py-4 px-6">{{ trip.title }}</td>
+                            <td class="py-4 px-6">{{ trip.description }}</td>
+                            <td class="py-1 px-1">
+                                {% if trip.image %}
+                                    <img src="{{ trip.image }}" alt="{{ trip.title }}" class="w-20">
+                                {% else %}
+                                    No Image
+                                {% endif %}
+                            </td>
+                            <td class="py-4 px-6">{{ trip.startDate ? trip.startDate|date('Y-m-d') : '' }}</td>
+                            <td class="py-4 px-6">{{ trip.endDate ? trip.endDate|date('Y-m-d') : '' }}</td>
+                            <td class="py-4 px-6">{{ trip.price }}</td>
+                            <td class="py-4 px-6">
+                            <div class="flex text-center">
+                               <a href="{{ path('app_trip_show', {'id': trip.id}) }}" class="px-2 py-2  text-amber-700 bg-white border border-amber-600 rounded hover:border-amber-900 mr-4">Show</a>
+                                <a href="{{ path('app_trip_edit', {'id': trip.id}) }}" class="px-4 py-2 text-emerald-700 bg-white border border-emerald-600 rounded hover:border-emerald-800 ">Edit</a>
+                          <div>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="8" class="py-4 px-6 text-center">No records found</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            </div>
+            </div
+        </div>
+
+       
+{% endblock %} 
