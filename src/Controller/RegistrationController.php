@@ -48,7 +48,7 @@ class RegistrationController extends AbstractController
             } elseif ($roleName === 'Editor') {
                 $roles[] = 'ROLE_EDITOR';
             }
-            else{
+            elseif ($roleName === 'User') {
                 $roles[] = 'ROLE_USER';
             }
 

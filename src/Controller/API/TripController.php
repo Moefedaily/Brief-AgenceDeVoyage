@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/api/trip')]
 class TripController extends AbstractController
 {
-    #[Route('s', name: 'app_trip_index', methods: ['GET'])]
+    #[Route('s', name: 'app_api_trip_index', methods: ['GET'])]
     public function index(TripRepository $tripRepository): Response
     {
             $trips = $tripRepository->findAll();
@@ -23,7 +23,6 @@ class TripController extends AbstractController
 
         }
     
-
     #[Route('s/category/{categoryName}', name: 'app_trips_by_category')]
     public function getTripsByCategory(string $categoryName, TripRepository $tripRepository): JsonResponse
     {
@@ -32,8 +31,7 @@ class TripController extends AbstractController
     
     }
 
-
-    #[Route('s/search', name: 'api_trips_search')]
+    #[Route('s/search', name: 'api_api_trips_search')]
 public function searchTrips(Request $request, TripRepository $tripRepository): Response
 {
     $category = $request->query->get('category');

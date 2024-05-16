@@ -43,7 +43,8 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the _first_ access control that matches will be used
     access_control:
-        - { path: ^/category, roles: ROLE_ADMIN }        
+        - { path: ^/category, roles: ROLE_ADMIN }  
+        - { path: ^/trip, roles: [ROLE_ADMIN,ROLE_EDITOR] }              
         - { path: ^/user, roles: ROLE_ADMIN }       
         - { path: ^/api, roles: PUBLIC_ACCESS }
 

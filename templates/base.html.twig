@@ -9,55 +9,71 @@
     {% endblock %}
 </head>
 <body class="bg-gray-100 flex flex-col min-h-screen">
-    <header class="bg-gradient-to-r from-slate-700 to-slate-900 shadow">
-        <nav class="container mx-auto flex justify-between items-center px-4 py-4">
-            <a href="{{ path('app_trip_index') }}" class="text-xl font-bold text-amber-100">Travel Agency</a>
-            <div class="flex items-center">
-                {% if app.user %}
-                    <span class="text-amber-400 font-bold mr-4">Welcome, {{ app.user.lastName }}</span>
-                    <a href="{{ path('app_logout') }}" class="text-amber-100 font-semibold hover:text-amber-600 mr-4">Logout</a>
-                    {% if is_granted('ROLE_ADMIN') %}
-                        <a href="{{ path('app_register') }}" class="text-amber-100 font-semibold hover:text-amber-600">Register</a>
-                    {% endif %}
-                {% else %}
-                    <a href="{{ path('app_login') }}" class="text-amber-100 font-semibold hover:text-amber-600 mr-4">Login</a>
-                {% endif %}
-            </div>
-        </nav>
-    </header>
-
     <div class="flex flex-grow">
-        {% if app.user %}
-            <aside class="w-72 bg-gradient-to-b from-slate-700 to-slate-900 text-white rounded shadow-lg py-10">
+            <aside class="w-72 bg-slate-800 text-white rounded shadow-lg py-10">
                 <div class="p-4 flex items-center">
-                    <i class="fas fa-plane-departure text-white text-3xl mx-auto"></i>
+                
+                    <i class="fas fa-plane-departure text-white text-3xl mr-2"></i>
+                    <span class="text-white text-2xl font-bold">Travel Agency</span>
                 </div>
                 <nav class="py-4 h-full">
                     <ul class="space-y-2 font-medium">
-                      
+                               {% if app.user %}
+
                         <li>
-                            <a href="{{ path('app_trip_index') }}" class="flex items-center p-2 text-gray-300 hover:text-white rounded-lg hover:bg-slate-700 transition duration-150 ease-in-out {% if app.request.attributes.get('_route') == 'app_trip_index' %}bg-slate-600 text-white{% endif %}">
+                            <a href="{{ path('app_trip_index') }}" class="flex items-center p-2 text-gray-300 hover:text-white rounded-lg hover:bg-slate-700 transition duration-150 ease-in-out {% if app.request.attributes.get('_route') == 'app_trip_index' %}bg-slate-700 text-white{% endif %}">
                                 <i class="fas fa-th-large text-gray-400 w-5 h-5"></i>
                                 <span class="flex-1 ms-3 whitespace-nowrap">Manage Trips</span>
                             </a>
                         </li>
                         <li>
-                            <a href="{{ path('app_user_index') }}" class="flex items-center p-2 text-gray-300 hover:text-white rounded-lg hover:bg-slate-700 transition duration-150 ease-in-out {% if app.request.attributes.get('_route') == 'app_user_index' %}bg-slate-600 text-white{% endif %}">
+                            <a href="{{ path('app_user_index') }}" class="flex items-center p-2 text-gray-300 hover:text-white rounded-lg hover:bg-slate-700 transition duration-150 ease-in-out {% if app.request.attributes.get('_route') == 'app_user_index' %}bg-slate-700 text-white{% endif %}">
                                 <i class="fas fa-users text-gray-400 w-5 h-5"></i>
                                 <span class="flex-1 ms-3 whitespace-nowrap">Manage Users</span>
                             </a>
                         </li>
                         <li>
-                            <a href="{{ path('app_contact_index') }}" class="flex items-center p-2 text-gray-300 hover:text-white rounded-lg hover:bg-slate-700 transition duration-150 ease-in-out {% if app.request.attributes.get('_route') == 'app_contact_index' %}bg-slate-600 text-white{% endif %}">
+                            <a href="{{ path('app_contact_index') }}" class="flex items-center p-2 text-gray-300 hover:text-white rounded-lg hover:bg-slate-700 transition duration-150 ease-in-out {% if app.request.attributes.get('_route') == 'app_contact_index' %}bg-slate-700 text-white{% endif %}">
                                 <i class="fas fa-envelope text-gray-400 w-5 h-5"></i>
                                 <span class="flex-1 ms-3 whitespace-nowrap">Manage Contacts</span>
                             </a>
                         </li>
+                        <li>
+                          <div class="p-4 mt-6 space-y-2">
+                    {% if app.user %}
+                        <div class="flex items-center">
+                            <i class="fas fa-user-circle text-amber-400 mr-2"></i>
+                            <span class="text-amber-400 font-bold">{{ app.user.lastName }}</span>
+                        </div>              
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <a href="{{ path('app_register') }}" class="flex items-center text-amber-100 font-semibold hover:text-amber-400">
+                                <i class="fas fa-user-plus mr-2"></i>
+                                <span>Register</span>
+                            </a>
+                        {% endif %}
+                    {% else %}
+                        <a href="{{ path('app_login') }}" class="flex items-center text-amber-100 font-semibold hover:text-amber-400">
+                            <i class="fas fa-sign-in-alt mr-2"></i>
+                            <span>Login</span>
+                        </a>
+                    {% endif %}
+                </div>
+                        </li>
+                                {% endif %}
+                        <li> 
+                        <div class="p-4 mt-6 space-y-2">
+                         <div class="flex items-center">
+                        <a href="{{ path('app_logout') }}" class="flex items-center text-amber-100 font-semibold hover:text-amber-400">
+                            <i class="fas fa-sign-out-alt mr-2"></i>
+                            <span>Logout</span>
+                        </a>
+                        </div>
+                        </div>
+                        </li>
                     </ul>
                 </nav>
-                
+              
             </aside>
-        {% endif %}
 
         <main class="flex-grow ml-1">
             <div class="container py-10 px-4 mx-auto">
