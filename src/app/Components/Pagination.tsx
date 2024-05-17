@@ -12,15 +12,15 @@ export const Pagination = ({
     <div className="flex space-x-2">
       <Button
         title="Prev"
-        bgColor="bg-gray-200"
-        color="text-gray-700"
+        bgColor="bg-button-start"
+        color="text-secondary"
         functionToPlay={onPrevClick}
         disabled={currentPage === 1}
       />
       <Button
         title="Next"
-        bgColor="bg-gray-200"
-        color="text-gray-700"
+        bgColor="bg-button-start"
+        color="text-secondary"
         functionToPlay={onNextClick}
         disabled={currentPage === totalPages}
       />

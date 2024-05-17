@@ -4,8 +4,6 @@ import { createContact } from '../Services/contact';
 import { ContactFormProps, Trip } from '../../Utils/types';
 import toast from 'react-hot-toast';
 
-
-
 const ContactForm = ({ trips }: ContactFormProps) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -42,9 +40,9 @@ const ContactForm = ({ trips }: ContactFormProps) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-lg mx-auto">
+    <form onSubmit={handleSubmit} className="max-w-lg mx-auto p-6 bg-wheat rounded-lg shadow-md">
       <div className="mb-4">
-        <label htmlFor="name" className="block mb-2 font-bold text-gray-700">
+        <label htmlFor="name" className="block mb-2 font-montserrat text-saddle">
           Name:
         </label>
         <input
@@ -53,11 +51,11 @@ const ContactForm = ({ trips }: ContactFormProps) => {
           value={name}
           onChange={(e) => setName(e.target.value)}
           required
-          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full px-4 py-2 border border-sienna rounded-md focus:outline-none focus:ring-2 focus:ring-chocolate"
         />
       </div>
       <div className="mb-4">
-        <label htmlFor="email" className="block mb-2 font-bold text-gray-700">
+        <label htmlFor="email" className="block mb-2 font-montserrat text-saddle">
           Email:
         </label>
         <input
@@ -66,11 +64,11 @@ const ContactForm = ({ trips }: ContactFormProps) => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
-          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full px-4 py-2 border border-sienna rounded-md focus:outline-none focus:ring-2 focus:ring-chocolate"
         />
       </div>
       <div className="mb-4">
-        <label htmlFor="phone" className="block mb-2 font-bold text-gray-700">
+        <label htmlFor="phone" className="block mb-2 font-montserrat text-saddle">
           Phone:
         </label>
         <input
@@ -79,11 +77,11 @@ const ContactForm = ({ trips }: ContactFormProps) => {
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
           required
-          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full px-4 py-2 border border-sienna rounded-md focus:outline-none focus:ring-2 focus:ring-chocolate"
         />
       </div>
       <div className="mb-4">
-        <label htmlFor="message" className="block mb-2 font-bold text-gray-700">
+        <label htmlFor="message" className="block mb-2 font-montserrat text-saddle">
           Message:
         </label>
         <textarea
@@ -91,11 +89,11 @@ const ContactForm = ({ trips }: ContactFormProps) => {
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           required
-          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full px-4 py-2 border border-sienna rounded-md focus:outline-none focus:ring-2 focus:ring-chocolate"
         ></textarea>
       </div>
       <div className="mb-4">
-        <label htmlFor="trip_id" className="block mb-2 font-bold text-gray-700">
+        <label htmlFor="trip_id" className="block mb-2 font-montserrat text-saddle">
           Trip:
         </label>
         <select
@@ -103,7 +101,7 @@ const ContactForm = ({ trips }: ContactFormProps) => {
           value={selectedTripId}
           onChange={(e) => setSelectedTripId(Number(e.target.value))}
           required
-          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full px-4 py-2 border border-sienna rounded-md focus:outline-none focus:ring-2 focus:ring-chocolate"
         >
           <option value="">Select a trip</option>
           {trips.map((trip) => (
@@ -116,7 +114,7 @@ const ContactForm = ({ trips }: ContactFormProps) => {
       <button
         type="button"
         onClick={handleSubmit}
-        className="px-6 py-3 text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="px-6 py-3 font-montserrat text-bg bg-primary rounded-md hover:bg-peru focus:outline-none focus:ring-2 focus:ring-chocolate"
       >
         Submit
       </button>

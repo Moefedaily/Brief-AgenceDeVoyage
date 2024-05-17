@@ -1,4 +1,5 @@
 'use client'
+
 import React, { useState, useEffect } from 'react';
 import { getAllTrips } from '../Services/trip';
 import { Trip } from '../../Utils/types';
@@ -36,45 +37,48 @@ const ContactPage = () => {
       <Header />
       <Hero
         title="Contact Us"
-        image="path/to/contact-hero-image.jpg"
+        image="/contact-hero.jpg"
+        fullHeight
       />
-     <div className="container mx-auto py-12">
-  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-    <ServiceCard
-      icon={<FaMapMarkerAlt />}
-      title="Office Address"
-      description="10 Diego Armando Maradona street Lanús, IN 1960"
-    />
-    <ServiceCard
-      icon={<FaPhone />}
-      title="Phone Call"
-      description="+98 234 (4567) 890 +98 234 (4567) 890"
-    />
-    <ServiceCard
-      icon={<FaEnvelope />}
-      title="E-Mail Us"
-      description="Maradona.10@gmail.com Diego.10@gmail.com"
-    />
-    <ServiceCard
-      icon={<FaHeadset/>}
-      title="Supports"
-      description="24/7 any time support team ready for supports."
-    />
-  </div>
-</div>
-      <div className="container mx-auto py-12">
-        <h2 className="text-3xl font-bold mb-8 text-center">Contact Form</h2>
+
+      <div className=" px-10 mx-auto bg-bg w-full py-32">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <ServiceCard
+            icon={<FaMapMarkerAlt className="text-primary" />}
+            title="Office Address"
+            description="10 Diego Armando Maradona street Lanús, IN 1960"
+          />
+          <ServiceCard
+            icon={<FaPhone className="text-primary" />}
+            title="Phone Call"
+            description="+98 234 (4567) 890 +98 234 (4567) 890"
+          />
+          <ServiceCard
+            icon={<FaEnvelope className="text-primary" />}
+            title="E-Mail Us"
+            description="Maradona.10@gmail.com Diego.10@gmail.com"
+          />
+          <ServiceCard 
+            icon={<FaHeadset className="text-primary" />}
+            title="Supports"
+            description="24/7 any time support team ready for supports."
+          />
+        </div>
+      </div>
+
+      <div className="mx-auto bg-bg rounded shadow-md py-32">
+        <h2 className="text-3xl font-bold mb-8 text-center font-merriweather text-primary">Contact Form</h2>
         {isLoading ? (
           <div className="flex justify-center items-center h-40">
             <Oval
               height={40}
               width={40}
-              color="#4fa94d"
+              color="#f49d0c"
               wrapperStyle={{}}
               wrapperClass=""
               visible={true}
               ariaLabel="oval-loading"
-              secondaryColor="#4fa94d"
+              secondaryColor="#f49d0c"
               strokeWidth={2}
               strokeWidthSecondary={2}
             />
@@ -85,10 +89,12 @@ const ContactPage = () => {
           </div>
         )}
       </div>
-      <div className="container mx-auto py-12">
-        <h2 className="text-3xl font-bold mb-8 text-center">Our Location</h2>
+
+      <div className=" w-10/12 rounded-md shadow-lg mx-auto  pt-10 pb-10">
+        <h2 className="text-3xl font-bold mb-8 text-center font-merriweather text-primary">Our Location</h2>
         <Map />
       </div>
+
       <Footer />
     </div>
   );

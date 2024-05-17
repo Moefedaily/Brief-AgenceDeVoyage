@@ -1,31 +1,34 @@
 import React from 'react';
 import Link from 'next/link';
+import { IoIosLogIn } from 'react-icons/io';
 
 export default function Nav() {
   return (
     <nav className="absolute top-0 left-0 right-0 z-20 mt-4">
-      <div className="container mx-auto flex justify-between items-center py-4 px-8 bg-slate-300 bg-opacity-20 rounded-full">
+      <div className="container mx-auto flex justify-between items-center py-4 px-8 bg-teratery bg-opacity-20 rounded-full">
         <div>
-          <Link href="/" className="text-white text-xl font-bold font-merriweather">
+          <Link href="/" className="text-bg text-xl font-extrabold font-merriweather">
             Travel Agency
           </Link>
         </div>
         <ul className="flex space-x-4 font-merriweather font-medium">
           <li>
-            <Link href="/" className="text-white hover:text-primary">
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link href="/user" className="text-white hover:text-primary">
+            <Link href="/user" className="text-bg font-bold hover:text-button-end">
               Trips
             </Link>
           </li>
           <li>
-            <Link href="/contact" className="text-white hover:text-primary">
+            <Link href="/contact" className="text-bg font-bold hover:text-button-end">
               Contact Us
             </Link>
+            
           </li>
+          <li>
+          <Link href="/login" className="text-bg font-bold hover:text-button-end flex items-center">
+            <span>Login</span>
+            <IoIosLogIn className="text-bg ml-2" />
+          </Link>
+        </li>
         </ul>
       </div>
     </nav>

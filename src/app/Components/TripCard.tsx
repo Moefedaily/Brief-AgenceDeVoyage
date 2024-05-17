@@ -12,32 +12,32 @@ export const TripCard = ({ trip }: TripCardProps) => {
   };
 
   return (
-    <div className="relative rounded-lg overflow-hidden shadow-lg mx-1 my-2">
-      <div className="absolute top-0 left-0 p-2 bg-slate-900 bg-opacity-50 rounded-br-lg">
-        <p className="text-yellow-100 font-semibold">
+    <div className="relative rounded-lg overflow-hidden shadow-lg mx-0 my-2 ">
+      <div className="absolute top-0 left-0 p-2 bg-primary bg-opacity-80 rounded-br-lg">
+        <p className="text-secondary font-semibold">
           {getDurationInDays(trip.startDate, trip.endDate)} Days
         </p>
       </div>
       <img src={trip.image} alt={trip.title} className="w-full h-96 object-cover" />
       <div className="absolute inset-x-0 bottom-0 bg-white p-4">
-        <h3 className="text-xl font-semibold mb-2 ">{trip.title}</h3>
-          <div className="flex justify-between items-center">
+        <h3 className="text-xl font-semibold mb-2 text-primary">{trip.title}</h3>
+        <div className="flex justify-between items-center">
           <div className="flex items-center mb-4">
-            <GiWorld className="mr-2 text-gray-500" />
-            <span className="text-gray-600 text-lg font-semibold">
-            {trip.destinations && trip.destinations.map((country) => country.name).join(', ')}
+            <GiWorld className="mr-2 text-teratery" />
+            <span className="text-gray-700 text-lg font-semibold">
+              {trip.destinations && trip.destinations.map((country) => country.name).join(', ')}
             </span>
           </div>
         </div>
         <div className="flex justify-between items-center">
           <div>
-            <p className="text-gray-600">
-              <span className="text-base font-semibold"> £ {trip.price}</span>
+            <p className="text-button-end">
+              <span className="text-base font-semibold">£ {trip.price}</span>
             </p>
           </div>
           <Link
             href={`/trips/${trip.id}`}
-            className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg text-sm font-medium"
+            className="bg-gradient-to-r from-button-start to-button-end hover:bg-button-end text-white py-2 px-4 rounded-lg text-sm font-medium"
           >
             Book Now
           </Link>

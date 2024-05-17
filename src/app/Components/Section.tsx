@@ -28,15 +28,15 @@ export const Section = ({ title, trips,sectionTitle}: SectionProps) => {
   };
 
   return (
-    <section className="py-8 bg-gray-100 rounded-lg shadow-md">
+    <section className="py-8 bg-bg rounded-lg shadow-md">
     <div className="container mx-auto px-4">
-    <h3 className="text-center text-xl font-semibold text-accent1 font-merriweather mb-6">
-      
+      <div>  
+    <h3 className="text-center text-3xl font-bold text-primary py-6 font-merriweather mb-6">
     {sectionTitle}
     </h3>
-     
+         </div>
       <div className="flex items-center justify-between mb-6">
-        <h2 className=" text-2xl font-bold text-primary font-montserrat">{title}</h2>
+        <h2 className=" text-2xl font-bold text-gray-600 font-montserrat">{title}</h2>
        
           <Pagination
             currentPage={currentPage}

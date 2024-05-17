@@ -32,12 +32,12 @@ const TripDetailsPage = ({ params }: { params: { id: string } }) => {
         <Oval
           height={80}
           width={80}
-          color="#4fa94d"
+          color="#f49d0c"
           wrapperStyle={{}}
           wrapperClass=""
           visible={true}
           ariaLabel="oval-loading"
-          secondaryColor="#4fa94d"
+          secondaryColor="#f49d0c"
           strokeWidth={2}
           strokeWidthSecondary={2}
         />
@@ -50,7 +50,6 @@ const TripDetailsPage = ({ params }: { params: { id: string } }) => {
     const end = new Date(endDate);
     const diffInMilliseconds = end.getTime() - start.getTime();
     const diffInDays = Math.ceil(diffInMilliseconds / (1000 * 60 * 60 * 24));
-    
     return diffInDays;
   }
 
@@ -59,39 +58,40 @@ const TripDetailsPage = ({ params }: { params: { id: string } }) => {
       <Header />
       {trip && (
         <Hero
-          title= {trip.destinations && trip.destinations.map((country) => country.name).join(', ')}
+          title={trip.destinations && trip.destinations.map((country) => country.name).join(', ')}
           subtitle={trip.title}
-          image="https://altours-html.asdesignsgalaxy.com/assets/images/Home/Home-2.jpg"
+          image="/trip-hero.jpg"
+          fullHeight
         />
       )}
       <div className="container w-11/12 mx-auto">
-      {trip ? (
-          <div className='mt-12'>
+        {trip ? (
+          <div className="mt-12">
             <div className="mb-8 flex items-baseline">
-              <h1 className="text-4xl font-bold mr-4">{trip.title}</h1>
-              <p className="text-2xl text-gray-600">£ {trip.price}</p>
+              <h1 className="text-4xl font-bold mr-4 text-button-start font-merriweather">{trip.title}</h1>
+              <p className="text-2xl text-teratery">£ {trip.price}</p>
             </div>
             <div className="flex flex-col md:flex-row">
               <div className="md:w-2/3 md:pr-8">
-                <img src={trip.image} alt={trip.title} className="w-full mb-8 rounded-lg shadow-md " />
-                <p className="text-lg leading-relaxed mb-8">{trip.description}</p>
+                <img src={trip.image} alt={trip.title} className="w-full mb-8 rounded-lg shadow-lg" />
+                <p className="text-lg leading-relaxed mb-8 text-primary">{trip.description}</p>
               </div>
               <div className="md:w-1/3">
-                <div className="bg-gray-100 rounded-lg p-6 shadow-md">
-                  <h2 className="text-2xl font-bold mb-4">Basic Information</h2>
-                  <p className="text-lg mb-2">
-                    <span className="font-semibold">Destination: </span> 
+                <div className="bg-white rounded-lg p-6 shadow-lg">
+                  <h2 className="text-2xl font-bold mb-4 text-primary font-merriweather">Basic Information</h2>
+                  <p className="text-lg mb-2 text-button-start">
+                    <span className="font-semibold text-teratery">Destination: </span>
                     {trip.destinations && trip.destinations.map((country) => country.name).join(', ')}
                   </p>
-                <p className="text-lg mb-2">
-                <span className="font-semibold">Duration: </span>
-                {getDurationInDays(trip.startDate, trip.endDate)} days
-                </p>
-                  <p className="text-lg mb-4">
-                    <span className="font-semibold">Departure: </span>
-                    {new Date(trip.startDate).toLocaleDateString('FR')} 
+                  <p className="text-lg mb-2 text-button-start">
+                    <span className="font-semibold text-teratery">Duration: </span>
+                    {getDurationInDays(trip.startDate, trip.endDate)} days
                   </p>
-                  <button className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded">
+                  <p className="text-lg mb-4 text-button-start">
+                    <span className="font-semibold text-teratery">Departure: </span>
+                    {new Date(trip.startDate).toLocaleDateString('FR')}
+                  </p>
+                  <button className="bg-primary text-white font-semibold py-3 px-6 rounded-lg">
                     Book Now
                   </button>
                 </div>
@@ -106,6 +106,5 @@ const TripDetailsPage = ({ params }: { params: { id: string } }) => {
     </div>
   );
 };
-
 
 export default TripDetailsPage;

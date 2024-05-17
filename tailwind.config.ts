@@ -9,11 +9,15 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        'primary': '#FF7F50', 
-        'secondary': '#F94144',
-        'tertiary': '#469C88', 
-        'accent1': '#2A6F97', 
-        'accent2': '#B7DCE9', 
+        primary: '#5e3429',
+        secondary: '#fef3c7',
+        teratery: '#bb7d45',
+        bg:'#f0e7d5',
+        fooHeader:'#bc560a',
+        'button-start': '#5e3429',
+        'button-end': '#a5623a',
+        'hero-shadow-start': '#fbd24e',
+        'hero-shadow-end': '#f49d0c',
       },
       fontFamily: {
         roboto: ['Roboto', 'sans-serif'],
